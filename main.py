@@ -25,15 +25,15 @@ class MainWindow(QMainWindow):
         self.menu_widget = QWidget()
         self.menu_layout = QVBoxLayout(self.menu_widget)
 
-        self.start_button = QPushButton("Start Game", self)
+        self.start_button = QPushButton("Start Game", self.menu_widget)  # Parent is menu_widget
         self.start_button.clicked.connect(self.start_game)
         self.menu_layout.addWidget(self.start_button)
 
-        self.edit_players_button = QPushButton("Edit Players", self)
+        self.edit_players_button = QPushButton("Edit Players", self.menu_widget)  # Parent is menu_widget
         self.edit_players_button.clicked.connect(self.edit_players)
         self.menu_layout.addWidget(self.edit_players_button)
 
-        self.edit_missions_button = QPushButton("Edit Missions", self)
+        self.edit_missions_button = QPushButton("Edit Missions", self.menu_widget)  # Parent is menu_widget
         self.edit_missions_button.clicked.connect(self.edit_missions)
         self.menu_layout.addWidget(self.edit_missions_button)
 
@@ -43,24 +43,23 @@ class MainWindow(QMainWindow):
         # --- Create Action View ---
         self.action_widget = QWidget()
         self.action_layout = QVBoxLayout(self.action_widget)
-        self.action_widget.setLayout(self.action_layout)
 
         # Add action view to stacked widget
         self.stacked_widget.addWidget(self.action_widget)
 
         # --- Widgets for specific actions (created on demand) ---
-        self.output_label = QLabel("", self)
+        self.output_label = QLabel("")  # No parent here
         self.output_label.setWordWrap(True)
 
-        self.players_editor = QTextEdit(self)
-        self.save_players_button = QPushButton("Save Players", self)
+        self.players_editor = QTextEdit()  # No parent here
+        self.save_players_button = QPushButton("Save Players")  # No parent here
         self.save_players_button.clicked.connect(self.save_edited_players)
 
-        self.missions_editor = QTextEdit(self)  # Added missions editor
-        self.save_missions_button = QPushButton("Save Missions", self)  # Added save missions button
+        self.missions_editor = QTextEdit()  # No parent here
+        self.save_missions_button = QPushButton("Save Missions")  # No parent here
         self.save_missions_button.clicked.connect(self.save_edited_missions)  # Connect save missions button
 
-        self.back_button = QPushButton("Back", self)
+        self.back_button = QPushButton("Back")  # No parent here
         self.back_button.clicked.connect(self.show_main_menu)
 
         # Initial state: Show main menu
@@ -152,11 +151,10 @@ class MainWindow(QMainWindow):
                 friends_list = [f.strip() for f in friends_part.split(',') if f.strip()]
                 new_players_data[name] = {"friends": friends_list}
 
-            if save_players(new_players_data):
-                QMessageBox.information(self, "Success", "Player data saved successfully.")
-                self.show_main_menu()
-            else:
-                QMessageBox.warning(self, "Error", "Failed to save player data to file.")
+            save_players(new_players_data)
+            QMessageBox.information(self, "Success", "Player data saved successfully.")
+            self.show_main_menu()
+            
         except Exception as e:
             QMessageBox.critical(self, "Parsing Error", f"Error parsing player data: {e}\nPlease check the format (Name: Friend1, Friend2).")
 
