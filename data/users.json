@@ -1,7 +1,32 @@
 {
-    "Alice": {"friends": ["Bob", "Carol"], "target": null, "kills": 0, "targeted_by": []},
-    "Bob": {"friends": ["Alice", "David"], "target": null, "kills": 0, "targeted_by": []},
-    "Carol": {"friends": ["Alice", "David"], "target": null, "kills": 0, "targeted_by": []},
-    "David": {"friends": ["Bob", "Carol", "Eve"], "target": null, "kills": 0, "targeted_by": []},
-    "Eve": {"friends": ["David"], "target": null, "kills": 0, "targeted_by": []}
+    "Alice": {
+        "friends": [
+            "Bob",
+            "Kyle"
+        ]
+    },
+    "Bob": {
+        "friends": [
+            "Alice",
+            "David"
+        ]
+    },
+    "Carol": {
+        "friends": [
+            "Alice",
+            "David"
+        ]
+    },
+    "David": {
+        "friends": [
+            "Bob",
+            "Carol",
+            "Eve"
+        ]
+    },
+    "Eve": {
+        "friends": [
+            "David"
+        ]
+    }
 }
