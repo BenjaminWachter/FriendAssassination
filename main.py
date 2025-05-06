@@ -3,7 +3,7 @@ import sys
 from functions.player import get_players, save_players
 # Import game logic functions from the new module
 from functions.game_main import assign_targets
-from functions.mission import generate_mission, get_missions
+from functions.mission import generate_mission, get_missions, save_missions  # Import save_missions
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -55,6 +55,10 @@ class MainWindow(QMainWindow):
         self.players_editor = QTextEdit(self)
         self.save_players_button = QPushButton("Save Players", self)
         self.save_players_button.clicked.connect(self.save_edited_players)
+
+        self.missions_editor = QTextEdit(self)  # Added missions editor
+        self.save_missions_button = QPushButton("Save Missions", self)  # Added save missions button
+        self.save_missions_button.clicked.connect(self.save_edited_missions)  # Connect save missions button
 
         self.back_button = QPushButton("Back", self)
         self.back_button.clicked.connect(self.show_main_menu)
@@ -160,16 +164,54 @@ class MainWindow(QMainWindow):
         self.clear_action_layout()
         self.show_action_view()
         current_missions = get_missions()
-        if not current_missions:
+        if current_missions is None:  # Check if loading failed
             self.output_label.setText("Error: Could not load mission data.")
             self.action_layout.addWidget(self.output_label)
             self.action_layout.addWidget(self.back_button)
             return
 
-        missions_list = "\n".join([f"{method}: {desc}" for method, desc in current_missions.items()])
-        self.output_label.setText(f"Current Missions:\n\n{missions_list}")
-        self.action_layout.addWidget(self.output_label)
-        self.action_layout.addWidget(self.back_button)
+        # Format missions for editing: Method: Description
+        # Each mission on a new line
+        mission_lines = []
+        for method, desc in current_missions.items():
+            mission_lines.append(f"{method}: {desc}")
+
+        self.missions_editor.setPlainText("\n".join(mission_lines))
+
+        self.action_layout.addWidget(QLabel("Edit Missions (Format: Method: Description):"))  # Instruction Label
+        self.action_layout.addWidget(self.missions_editor)  # Add editor
+        self.action_layout.addWidget(self.save_missions_button)  # Add save button
+        self.action_layout.addWidget(self.back_button)  # Add back button
+
+    def save_edited_missions(self):
+        """Parses the text editor and saves mission data."""
+        text = self.missions_editor.toPlainText()
+        new_missions_data = {}
+        lines = text.split('\n')
+        try:
+            for line in lines:
+                line = line.strip()
+                if not line or ':' not in line:
+                    continue  # Skip empty or invalid lines
+
+                method, desc = line.split(':', 1)
+                method = method.strip()
+                desc = desc.strip()
+                if not method or not desc:  # Ensure both parts exist
+                    continue
+
+                new_missions_data[method] = desc
+
+            # --- Save the data using the imported function ---
+            # Make sure save_missions exists in functions/mission.py
+            if save_missions(new_missions_data):
+                QMessageBox.information(self, "Success", "Mission data saved successfully.")
+                self.show_main_menu()  # Go back to main menu after saving
+            else:
+                QMessageBox.warning(self, "Error", "Failed to save mission data to file.")
+        except Exception as e:
+            QMessageBox.critical(self, "Parsing Error", f"Error parsing mission data: {e}\nPlease check the format (Method: Description).")
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
