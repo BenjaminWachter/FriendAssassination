@@ -1,0 +1,32 @@
+{
+    "Alice": {
+        "friends": [
+            "Bob",
+            "Kyle"
+        ]
+    },
+    "Bob": {
+        "friends": [
+            "Alice",
+            "David"
+        ]
+    },
+    "Carol": {
+        "friends": [
+            "Alice",
+            "David"
+        ]
+    },
+    "David": {
+        "friends": [
+            "Bob",
+            "Carol",
+            "Eve"
+        ]
+    },
+    "Eve": {
+        "friends": [
+            "David"
+        ]
+    }
+}
