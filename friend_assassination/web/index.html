@@ -34,5 +34,26 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+// Define minimum window size
+const minWidth = 300;
+const minHeight = 600;
+
+// Function to enforce minimum window size
+function enforceMinimumSize() {
+  if (window.innerWidth < minWidth || window.innerHeight < minHeight) {
+    window.resizeTo(
+      Math.max(window.innerWidth, minWidth),
+      Math.max(window.innerHeight, minHeight)
+    );
+  }
+}
+
+// Attach function to window resize event
+window.addEventListener('resize', enforceMinimumSize);
+
+// Call function initially to enforce minimum size on page load
+enforceMinimumSize();
+</script>
 </body>
 </html>
