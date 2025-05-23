@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// Added for debugPrint
 
 // Main function to run the app
 void main() {
@@ -98,7 +99,7 @@ class FriendAssassinationMainPage extends StatelessWidget {
                 // Placeholder icon
                 child: Icon(
                   Icons.person_outline, // Generic person icon
-                  color: textColor.withOpacity(0.5), // Semi-transparent white
+                  color: textColor.withAlpha((0.5 * 255).round()), // Semi-transparent white
                   size: 150, // Large icon size
                 ),
               ),
@@ -143,7 +144,7 @@ class FriendAssassinationMainPage extends StatelessWidget {
                 onPressed: () {
                   // Action to perform when the button is pressed
                   // For example, show a confirmation dialog or navigate
-                  print('Confirm Kill button pressed');
+                  debugPrint('Confirm Kill button pressed');
                   // You could show the dialog from the Figma design here
                   // showDialog(context: context, builder: (context) => ...);
                 },

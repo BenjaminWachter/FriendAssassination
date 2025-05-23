@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:friend_assassination/home.dart';
 import 'package:friend_assassination/domain/handler.dart';
+import 'package:friend_assassination/responsive_layout.dart';
+import 'package:friend_assassination/login_phone.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +14,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  static const Color darkBackgroundColor = Color(0xFF201A30); // Darker purple/blue
+  static const Color cardBackgroundColor = Color(0xFF2D2F3E); // Slightly lighter dark shade
+  static const Color accentColor = Color(0xFF7B5AFF); // Purple accent
+  static const Color textColor = Colors.white;
+  static const Color subTextColor = Colors.white70;
+
 
   @override
   void dispose() {
@@ -77,7 +86,10 @@ class _LoginPageState extends State<LoginPage> {
     // Calculate form width based on screen size
     double formWidth = screenWidth > 600 ? 400 : screenWidth * 0.85;
 
-    return Scaffold(
+    // Web view for the login page
+    Widget loginWebView = Scaffold(
+      backgroundColor: darkBackgroundColor,
+      
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -197,6 +209,16 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+    );
+
+    return ResponsiveLayout(
+      phoneView: LoginPhonePage(
+        userController: _userController,
+        passwordController: _passwordController,
+        onLogin: _login,
+        onExit: _exitApp,
+      ),
+      webView: loginWebView,
     );
   }
 }

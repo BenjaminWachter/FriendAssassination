@@ -1,8 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 
 class AssassinationHome extends StatefulWidget {
-  const AssassinationHome({Key? key}) : super(key: key);
+  const AssassinationHome({super.key});
 
   @override
   State<AssassinationHome> createState() => _AssassinationHomeState();
@@ -72,7 +74,7 @@ class _AssassinationHomeState extends State<AssassinationHome> {
                 // Placeholder icon
                 child: Icon(
                   Icons.person_outline, // Generic person icon
-                  color: textColor.withOpacity(0.5), // Semi-transparent white
+                  color: textColor.withAlpha(128), // Semi-transparent white // Replaced withOpacity
                   size: 150, // Large icon size
                 ),
               ),
@@ -117,7 +119,7 @@ class _AssassinationHomeState extends State<AssassinationHome> {
                 onPressed: () {
                   // Action to perform when the button is pressed
                   // For example, show a confirmation dialog or navigate
-                  print('Confirm Kill button pressed');
+                  debugPrint('Confirm Kill button pressed');
                   // You could show the dialog from the Figma design here
                   // showDialog(context: context, builder: (context) => ...);
                 },
@@ -132,74 +134,6 @@ class _AssassinationHomeState extends State<AssassinationHome> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-    // Get screen dimensions
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
-    // Define minimum screen size
-    const double minWidth = 360;
-    const double minHeight = 500;
-
-    // Check if screen size meets the minimum requirements
-    if (screenWidth < minWidth || screenHeight < minHeight) {
-      return Scaffold(
-        body: Center(
-          child: Text(
-            'Screen size too small. Please use a larger device.',
-            style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Assassination Home'),
-      ),
-      body: Center(
-        child: Text(
-          'Welcome to the Assassination Home!',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Implement your action here
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Floating Action Button Pressed')),
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {
-                // Implement your action here
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Home Button Pressed')),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                // Implement your action here
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Settings Button Pressed')),
-                );
-              },
-            ),
-          ],
         ),
       ),
     );
