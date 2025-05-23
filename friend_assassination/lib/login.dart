@@ -1,55 +1,6 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Friend Assassination Login',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.red,
-        scaffoldBackgroundColor: const Color(0xFF121212), // Very dark grey, almost black
-        textTheme: const TextTheme(
-          headlineSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          titleMedium: TextStyle(color: Colors.redAccent),
-          bodyMedium: TextStyle(color: Colors.white70),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.grey[800], // Darker grey for input fields
-          hintStyle: TextStyle(color: Colors.grey[500]),
-          labelStyle: TextStyle(color: Colors.grey[400]),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: const BorderSide(color: Colors.redAccent),
-          ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red[700], // Maroon color for buttons
-            foregroundColor: Colors.white, // Text color for buttons
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
-          ),
-        ),
-      ),
-      home: const LoginPage(),
-    );
-  }
-}
+import 'package:friend_assassination/home.dart';
+import 'package:friend_assassination/domain/handler.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -73,11 +24,21 @@ class _LoginPageState extends State<LoginPage> {
     // Implement login logic here
     String username = _userController.text;
     String password = _passwordController.text;
-    debugPrint('Login attempt with Username: $username, Password: $password');
-    // For now, just show a snackbar
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Logging in as $username... (Not implemented)')),
-    );
+    debugPrint('Login attempt with Username: $username');
+    if (LoginHander().handleLogin(username, password)) {
+      // If login is successful, navigate to the home page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AssassinationHome(),
+        ),
+      );
+    } else {
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid username or password')),
+      );
+    }
   }
 
   void _exitApp() {
