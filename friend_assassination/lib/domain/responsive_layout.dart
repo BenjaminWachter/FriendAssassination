@@ -9,7 +9,7 @@ class ResponsiveLayout extends StatelessWidget {
     Key? key,
     required this.phoneView,
     required this.webView,
-    this.breakpoint = 600.0, // Default breakpoint for typical phone/tablet split
+    this.breakpoint = 800.0, // Default breakpoint for typical phone/tablet split
   }) : super(key: key);
 
   @override

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:friend_assassination/domain/responsive_layout.dart';
 
 
 class AssassinationHome extends StatefulWidget {
@@ -20,7 +21,7 @@ class _AssassinationHomeState extends State<AssassinationHome> {
 
 @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Widget homeWebView = Scaffold(
       // Setting the background color of the scaffold
       backgroundColor: darkBackgroundColor,
       // Using SafeArea to avoid intrusions by system UI (status bar, notch)
@@ -137,5 +138,7 @@ class _AssassinationHomeState extends State<AssassinationHome> {
         ),
       ),
     );
+
+    return ResponsiveLayout(phoneView: homeWebView, webView: homeWebView);
   }
 }

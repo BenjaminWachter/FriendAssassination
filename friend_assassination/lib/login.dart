@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:friend_assassination/home.dart';
 import 'package:friend_assassination/domain/handler.dart';
-import 'package:friend_assassination/responsive_layout.dart';
-import 'package:friend_assassination/login_phone.dart';
+import 'package:friend_assassination/domain/responsive_layout.dart';
+import 'package:friend_assassination/mobile/login_phone.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
