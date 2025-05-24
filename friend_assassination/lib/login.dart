@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:friend_assassination/home.dart';
 import 'package:friend_assassination/domain/handler.dart';
 import 'package:friend_assassination/domain/responsive_layout.dart';
-import 'package:friend_assassination/mobile/login_phone.dart';
+import 'package:friend_assassination/mobile/login_mobile.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,12 +15,15 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  static const Color darkBackgroundColor = Color(0xFF201A30); // Darker purple/blue
-  static const Color cardBackgroundColor = Color(0xFF2D2F3E); // Slightly lighter dark shade
+  static const Color darkBackgroundColor = Color(
+    0xFF201A30,
+  ); // Darker purple/blue
+  static const Color cardBackgroundColor = Color(
+    0xFF2D2F3E,
+  ); // Slightly lighter dark shade
   static const Color accentColor = Color(0xFF7B5AFF); // Purple accent
   static const Color textColor = Colors.white;
   static const Color subTextColor = Colors.white70;
-
 
   @override
   void dispose() {
@@ -38,9 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       // If login is successful, navigate to the home page
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => const AssassinationHome(),
-        ),
+        MaterialPageRoute(builder: (context) => const AssassinationHome()),
       );
     } else {
       // Show error message
@@ -89,14 +90,12 @@ class _LoginPageState extends State<LoginPage> {
     // Web view for the login page
     Widget loginWebView = Scaffold(
       backgroundColor: darkBackgroundColor,
-      
+
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: formWidth,
-            ),
+            constraints: BoxConstraints(maxWidth: formWidth),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -105,27 +104,27 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   'Friend',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontSize: 36,
-                        color: Colors.white,
-                      ),
+                    fontSize: 36,
+                    color: Colors.white,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   'Assassination',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontSize: 48,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    fontSize: 48,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 // Subtitle
                 Text(
                   'How well do you know your friends?',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontSize: 16,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 50),
@@ -151,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                       // Welcome Text
                       Text(
                         'Welcome',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              fontSize: 24,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineSmall?.copyWith(fontSize: 24),
                       ),
                       const SizedBox(height: 20),
 
@@ -162,7 +161,10 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _userController,
                         decoration: const InputDecoration(
                           labelText: 'User',
-                          prefixIcon: Icon(Icons.person_outline, color: Colors.grey),
+                          prefixIcon: Icon(
+                            Icons.person_outline,
+                            color: Colors.grey,
+                          ),
                         ),
                         keyboardType: TextInputType.text,
                       ),
@@ -173,7 +175,10 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _passwordController,
                         decoration: const InputDecoration(
                           labelText: 'Password',
-                          prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
+                          prefixIcon: Icon(
+                            Icons.lock_outline,
+                            color: Colors.grey,
+                          ),
                         ),
                         obscureText: true,
                       ),
